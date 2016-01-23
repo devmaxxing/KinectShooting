@@ -5,7 +5,7 @@ using Windows.Kinect;
 
 public class GameController : MonoBehaviour {
 
-    public int numPlayers;
+    public int numPlayers = 1;
     public int gameMode;
     public int respawnSpeed;
     public int respawnNum;
@@ -20,6 +20,11 @@ public class GameController : MonoBehaviour {
     private float nextRespawn;
 	// Use this for initialization
 	void Start () {
+        for(int i = 4; i > numPlayers; i--)
+        {
+            players[i - 1].SetActive(false);
+            scoreTexts[i - 1].text = "";
+        }
         Cursor.visible = false;
         nextRespawn = Random.Range(respawnSpeed - 1, respawnSpeed + 1);
     }
