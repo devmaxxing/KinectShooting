@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public int respawnNum;
 
     public GameObject[] players;
+    public GameObject target;
     public Text[] scoreTexts;
     public Text timeText;
 
@@ -26,6 +27,18 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         timeElapsed += Time.deltaTime;
+        if(timeElapsed > nextRespawn)
+        {
+            for(int i = 0; i< respawnNum; i++)
+            {
+                float randX = Random.Range(-40,40);
+                float randY = Random.Range(-20,20);
+                GameObject newTarget = Instantiate(target);
+                newTarget.transform.position = new Vector2(randX, randY);
+            }
+            nextRespawn = Random.Range(respawnSpeed - 1, respawnSpeed + 1);
+            timeElapsed = 0;
+        }
         //_Data = kinectManager.getData();
         //int numBodies = kinectManager.getNumBodies();
 
