@@ -16,7 +16,7 @@ using UnityEngine;
 public class GestureDetector : IDisposable
 {
     /// <summary> Path to the gesture database that was trained with VGB </summary>
-    private readonly string gestureDatabase = @"Assets\Gestures\Database\GunGestures.gbd";
+    private readonly string gestureDatabase = @"Assets\GestureDatabase\GunGestures.gbd";
 
     /// <summary> Name of the discrete gesture in the database that we want to track </summary>
     private readonly string shootingGestureName = "Shoot";
