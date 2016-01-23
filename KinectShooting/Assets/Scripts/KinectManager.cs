@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using Windows.Kinect;
 
 public class KinectManager: MonoBehaviour {
@@ -8,6 +8,10 @@ public class KinectManager: MonoBehaviour {
 	private KinectSensor _Sensor;
 	private BodyFrameReader _Reader;
 	private Body[] _Data = null;
+
+    private PlayerScript playerScript;
+
+    private List<GestureDetector> gestureDetectorList;
 
 	// Use this for initialization
 	void Start () {
@@ -21,9 +25,11 @@ public class KinectManager: MonoBehaviour {
 			{
 				_Sensor.Open();
 			}
-            if(_Sensor.IsAvailable)
-                kinectEnabled = true;
-		} 
+            kinectEnabled = true;
+            gestureDetectorList = new List<GestureDetector>();
+		}
+
+
 	}
 	
 	// Update is called once per frame
@@ -40,9 +46,31 @@ public class KinectManager: MonoBehaviour {
 				}
 
 				frame.GetAndRefreshBodyData(_Data);
+                frame.Dispose();
+                frame = null;
 
-				frame.Dispose();
-				frame = null;
+                // we may have lost/acquired bodies, so update the corresponding gesture detectors
+                // loop through all bodies to see if any of the gesture detectors need to be updated
+                for (int i = 0; i < _Data.Length; ++i)
+                {
+                    if(gestureDetectorList.Count <= i)
+                    {
+                        GestureDetector detector = new GestureDetector(_Sensor, this);
+                        this.gestureDetectorList.Add(detector);
+                    }
+                    Body body = _Data[i];
+                    ulong trackingId = body.TrackingId;
+
+                    // if the current body TrackingId changed, update the corresponding gesture detector with the new value
+                    if (trackingId != this.gestureDetectorList[i].TrackingId)
+                    {
+                        this.gestureDetectorList[i].TrackingId = trackingId;
+
+                        // if the current body is tracked, unpause its detector to get VisualGestureBuilderFrameArrived events
+                        // if the current body is not tracked, pause its detector so we don't waste resources trying to get invalid gesture results
+                        this.gestureDetectorList[i].IsPaused = trackingId == 0;
+                    }
+                }   
 			}
 		}
 	}
@@ -73,5 +101,19 @@ public class KinectManager: MonoBehaviour {
     public int getNumBodies()
     {
         return _Sensor.BodyFrameSource.BodyCount;
+    }
+
+
+    //Callback from GestureDetector with its corresponding tracking ID
+    void ShotFired(ulong trackingID)
+    {
+        for(int i=0; i < _Data.Length; i++)
+        {
+            if(_Data[i].TrackingId == trackingID)
+            {
+                Debug.Log("Player " + i + " says: bang!");
+                return;
+            }
+        }
     }
 }
