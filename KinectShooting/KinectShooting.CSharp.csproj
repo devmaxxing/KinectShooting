@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\KinectManager.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\TargetScript.cs" />
+    <Compile Include="Assets\TargetBreakController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

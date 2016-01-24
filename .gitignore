@@ -8,7 +8,6 @@
 Assets/Gestures/Clips
 sysinfo.txt
 *.stackdump
-*.meta
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #

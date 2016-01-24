@@ -4,6 +4,7 @@ using Windows.Kinect;
 
 public class PlayerScript : MonoBehaviour {
     public int playerID;
+    public GameObject targetBreak;
     public KinectManager kinectManager;
     private GameObject target;
     private GameController gameController;
@@ -69,7 +70,8 @@ public class PlayerScript : MonoBehaviour {
             Collider2D targetCollider = target.GetComponent<Collider2D>();
             if (targetCollider.bounds.Intersects(this.gameObject.GetComponent<Collider2D>().bounds))
             {
-                target.GetComponent<Animator>();
+                GameObject go = GameObject.Instantiate(targetBreak);
+                go.transform.position = target.transform.position;
                 if (GameController.gameStarted) {
                     Destroy(target);
                     gameController.increaseScore(1, playerID);
