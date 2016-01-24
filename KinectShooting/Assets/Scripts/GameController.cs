@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour {
             {
                 for(int i = 0; i< respawnNum; i++)
                 {
-                    float randY = Random.Range(-15,15);
+                    float randY = Random.Range(-13,13);
                     GameObject newTarget = Instantiate(target);
                     newTarget.transform.position = new Vector2(50, randY);
                 }
