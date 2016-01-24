@@ -36,7 +36,9 @@ public class KinectManager: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (_Reader != null)
+        if (_Sensor.IsAvailable)
+            kinectEnabled = true;
+        if (_Reader != null)
 		{
 			var frame = _Reader.AcquireLatestFrame();
 
