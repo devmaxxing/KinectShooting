@@ -25,32 +25,36 @@ public class PlayerScript : MonoBehaviour {
             Body[] _Data = kinectManager.getData();
             int numBodies = kinectManager.getNumBodies();
 
-            int player1 = -1;
-            int player2 = -1;
-            for (int i = 0; i < numBodies; i++)
+            if(_Data != null)
             {
-                if (_Data[i].IsTracked)
+                int player1 = -1;
+                int player2 = -1;
+                for (int i = 0; i < numBodies; i++)
                 {
-                    if (player1 == -1)
-                        player1 = i;
-                    else
-                        player2 = i;
+                    if (_Data[i].IsTracked)
+                    {
+                        if (player1 == -1)
+                            player1 = i;
+                        else
+                            player2 = i;
+                    }
                 }
-            }
-            if (player1 > -1)
-            {
-                if (_Data[player1].HandRightState != HandState.Closed)
+                if (player1 > -1)
                 {
-                    float horizontal =
-                        (float)(_Data[player1].Joints[JointType.HandRight].Position.X
-                            * 50 - _Data[player1].Joints[JointType.ShoulderRight].Position.X * 60);
-                    float vertical =
-                        (float)(_Data[player1].Joints[JointType.HandRight].Position.Y
-                            * 30);
+                    if (_Data[player1].HandRightState != HandState.Closed)
+                    {
+                        float horizontal =
+                            (float)(_Data[player1].Joints[JointType.HandRight].Position.X
+                                * 200 - _Data[player1].Joints[JointType.ShoulderRight].Position.X * 120);
+                        float vertical =
+                            (float)(_Data[player1].Joints[JointType.HandRight].Position.Y
+                                * 200);
 
-                    transform.position = new Vector2(horizontal, vertical);
+                        transform.position = new Vector2(horizontal, vertical);
+                    }
                 }
             }
+           
         }
         if (Input.GetMouseButtonDown(0)) {
             shoot();
