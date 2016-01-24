@@ -48,7 +48,7 @@ public class PlayerScript : MonoBehaviour {
                                 * 200 - _Data[player1].Joints[JointType.ShoulderRight].Position.X * 120);
                         float vertical =
                             (float)(_Data[player1].Joints[JointType.HandRight].Position.Y
-                                * 200);
+                                * 200 - _Data[player1].Joints[JointType.ShoulderRight].Position.Y * 120);
 
                         transform.position = new Vector2(horizontal, vertical);
                     }
