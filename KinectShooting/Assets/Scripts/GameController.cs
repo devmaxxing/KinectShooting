@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour {
             {
                 for(int i = 0; i< respawnNum; i++)
                 {
-                    float randY = Random.Range(-15,15);
+                    float randY = Random.Range(-13,13);
                     GameObject newTarget = Instantiate(target);
                     newTarget.transform.position = new Vector2(50, randY);
                 }
@@ -73,12 +73,12 @@ public class GameController : MonoBehaviour {
             if(respawnSpeed!=0.0f)
                 respawnSpeed -= 0.05f;
         }
-        scoreTexts[playerID].text = "Player " + (playerID + 1) + ": " + scores[playerID];
+        scoreTexts[playerID].text = "Score: " + scores[playerID];
     }
 
     public void reset()
     {
-        scoreTexts[0].text = "Player 1: " + scores[0];
+        scoreTexts[0].text = "Score: " + scores[0];
         target.GetComponent<TargetScript>().speed = 20;
         respawnSpeed = 1;
     }
