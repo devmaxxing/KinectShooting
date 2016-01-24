@@ -4,6 +4,7 @@ using Windows.Kinect;
 
 public class KinectManager: MonoBehaviour {
 
+    public GameController controller;
     public static bool kinectEnabled = false;
 	private KinectSensor _Sensor;
 	private BodyFrameReader _Reader;
@@ -128,5 +129,6 @@ public class KinectManager: MonoBehaviour {
             }
         }
         */
+        controller.fireShot();
     }
 }

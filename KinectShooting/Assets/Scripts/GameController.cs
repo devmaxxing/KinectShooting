@@ -49,48 +49,14 @@ public class GameController : MonoBehaviour {
                 }
                 timeElapsed = 0;
             }
-            //_Data = kinectManager.getData();
-            //int numBodies = kinectManager.getNumBodies();
-
-            //int player1 = -1;
-            //int player2 = -1;
-            //for (int i = 0; i < numBodies; i++)
-            //{
-            //    if (_Data[i].IsTracked)
-            //    {
-            //        if (player1 == -1)
-            //            player1 = i;
-            //        else
-            //            player2 = i;
-            //    }
-            //}
-            //moveGameObject(p1, player1);
-            //moveGameObject(p2, player2);
-        }else if (gameOver)
+        }
+        else if (gameOver)
         {
             startText.text = "Game Over! Shoot the target to try again.";
             scores[0] = 0;
             startTarget.SetActive(true);
             gameOver = false;
         }
-    }
-
-    void moveGameObject(GameObject g, int playerIndex)
-    {
-        //if (playerIndex > -1)
-        //{
-        //    if (_Data[playerIndex].HandRightState != HandState.Closed)
-        //    {
-        //        float horizontal =
-        //            (float)(_Data[playerIndex].Joints[JointType.HandRight].Position.X
-        //                * 50 - _Data[playerIndex].Joints[JointType.ShoulderRight].Position.X * 60);
-        //        float vertical =
-        //            (float)(_Data[playerIndex].Joints[JointType.HandRight].Position.Y
-        //                * 30);
-
-        //        g.transform.position = new Vector2(horizontal, vertical);
-        //    }
-        //}
     }
 
     public void increaseScore(int incBy, int playerID)
@@ -110,5 +76,10 @@ public class GameController : MonoBehaviour {
         scoreTexts[0].text = "Player 1: " + scores[0];
         target.GetComponent<TargetScript>().speed = 20;
         respawnSpeed = 1;
+    }
+
+    public void fireShot()
+    {
+        players[0].GetComponent<PlayerScript>().shoot();
     }
 }
