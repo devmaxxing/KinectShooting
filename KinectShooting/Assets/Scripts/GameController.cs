@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using Windows.Kinect;
 
 public class GameController : MonoBehaviour {
 
     public int numPlayers = 1;
     public int gameMode;
-    public int respawnSpeed;
+    public float respawnSpeed;
     public int respawnNum;
 
     public GameObject[] players;
@@ -17,31 +18,28 @@ public class GameController : MonoBehaviour {
 
     private int[] scores = { 0 };
     private float timeElapsed = 0;
-    private float nextRespawn;
+
 	// Use this for initialization
 	void Start () {
-        for(int i = 4; i > numPlayers; i--)
-        {
-            players[i - 1].SetActive(false);
-            scoreTexts[i - 1].text = "";
-        }
+        //for(int i = 4; i > numPlayers; i--)
+        //{
+        //    players[i - 1].SetActive(false);
+        //    scoreTexts[i - 1].text = "";
+        //}
         Cursor.visible = false;
-        nextRespawn = Random.Range(respawnSpeed - 1, respawnSpeed + 1);
     }
 	
 	// Update is called once per frame
 	void Update () {
         timeElapsed += Time.deltaTime;
-        if(timeElapsed > nextRespawn)
+        if(timeElapsed > respawnSpeed)
         {
             for(int i = 0; i< respawnNum; i++)
             {
-                float randX = Random.Range(-40,40);
                 float randY = Random.Range(-20,20);
                 GameObject newTarget = Instantiate(target);
-                newTarget.transform.position = new Vector2(randX, randY);
+                newTarget.transform.position = new Vector2(50, randY);
             }
-            nextRespawn = Random.Range(respawnSpeed - 1, respawnSpeed + 1);
             timeElapsed = 0;
         }
         //_Data = kinectManager.getData();
@@ -84,6 +82,12 @@ public class GameController : MonoBehaviour {
     public void increaseScore(int incBy, int playerID)
     {
         scores[playerID] += incBy;
+        if (scores[playerID] % 10 == 0)
+        {
+            target.GetComponent<TargetScript>().speed += 5;
+            if(respawnSpeed!=0.0f)
+                respawnSpeed -= 0.05f;
+        }
         scoreTexts[playerID].text = "Player " + (playerID + 1) + ": " + scores[playerID];
     }
 }
