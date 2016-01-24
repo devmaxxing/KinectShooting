@@ -25,7 +25,8 @@ public class KinectManager: MonoBehaviour {
 			{
 				_Sensor.Open();
 			}
-            kinectEnabled = true;
+            if(_Sensor.IsAvailable)
+                kinectEnabled = true;
             gestureDetectorList = new List<GestureDetector>();
 		}
 

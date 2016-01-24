@@ -31,8 +31,17 @@ public class PlayerScript : MonoBehaviour {
             Collider2D targetCollider = target.GetComponent<Collider2D>();
             if (targetCollider.bounds.Intersects(this.gameObject.GetComponent<Collider2D>().bounds))
             {
-                Destroy(target);
-                gameController.increaseScore(1, playerID);
+                target.GetComponent<Animator>();
+                if (GameController.gameStarted) {
+                    Destroy(target);
+                    gameController.increaseScore(1, playerID);
+                }
+                else
+                {
+                    target.SetActive(false);
+                    gameController.reset();
+                    GameController.gameStarted = true;
+                }
                 break;
             }
         }
