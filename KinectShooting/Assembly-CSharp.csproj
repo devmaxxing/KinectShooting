@@ -45,10 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GameController.cs" />
-     <Compile Include="Assets\GameSettings.cs" />
-     <Compile Include="Assets\KinectManager.cs" />
-     <Compile Include="Assets\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GameSettings.cs" />
+     <Compile Include="Assets\Scripts\GestureDetector.cs" />
+     <Compile Include="Assets\Scripts\KinectManager.cs" />
+     <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\TargetScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
