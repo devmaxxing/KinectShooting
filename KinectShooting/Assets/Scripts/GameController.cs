@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
     public GameObject[] players;
     public GameObject target;
     public GameObject startTarget;
+
     public Text[] scoreTexts;
     //public Text timeText;
     public Text startText;
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour {
             {
                 for(int i = 0; i< respawnNum; i++)
                 {
-                    float randY = Random.Range(-20,20);
+                    float randY = Random.Range(-15,15);
                     GameObject newTarget = Instantiate(target);
                     newTarget.transform.position = new Vector2(50, randY);
                 }

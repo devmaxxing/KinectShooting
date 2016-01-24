@@ -68,6 +68,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BackgroundController.cs" />
+    <Compile Include="Assets\BackgroundGenerator.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\GestureDetector.cs" />
