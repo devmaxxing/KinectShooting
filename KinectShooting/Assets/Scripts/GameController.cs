@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
     public int gameMode;
     public float respawnSpeed;
     public int respawnNum;
+    public UnityEngine.AudioSource titleAudio;
+    public UnityEngine.AudioSource gameAudio;
 
     public GameObject[] players;
     public GameObject target;
@@ -52,6 +54,8 @@ public class GameController : MonoBehaviour {
         }
         else if (gameOver)
         {
+            titleAudio.Play();
+            gameAudio.Stop();
             startText.text = "Game Over! Shoot the target to try again.";
             scores[0] = 0;
             startTarget.SetActive(true);

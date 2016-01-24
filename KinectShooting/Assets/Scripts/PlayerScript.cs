@@ -64,6 +64,7 @@ public class PlayerScript : MonoBehaviour {
 
     public void shoot()
     {
+        this.GetComponent<UnityEngine.AudioSource>().Play();
         var targets = GameObject.FindGameObjectsWithTag("Target");
         foreach(GameObject target in targets)
         {
@@ -81,6 +82,9 @@ public class PlayerScript : MonoBehaviour {
                     target.SetActive(false);
                     gameController.reset();
                     GameController.gameStarted = true;
+                    
+                    gameController.titleAudio.Stop();
+                    gameController.gameAudio.Play();
                 }
                 break;
             }
