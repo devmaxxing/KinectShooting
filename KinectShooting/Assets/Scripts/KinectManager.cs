@@ -55,11 +55,19 @@ public class KinectManager: MonoBehaviour {
                 {
                     if(gestureDetectorList.Count <= i)
                     {
+                        //Debug.Log(i);
                         GestureDetector detector = new GestureDetector(_Sensor, this);
                         this.gestureDetectorList.Add(detector);
                     }
                     Body body = _Data[i];
                     ulong trackingId = body.TrackingId;
+
+                    GestureDetector currentDetector = gestureDetectorList[i];
+
+                    if(currentDetector.shotFired)
+                    {
+                        shotFired(currentDetector.TrackingId);
+                    }
 
                     // if the current body TrackingId changed, update the corresponding gesture detector with the new value
                     if (trackingId != this.gestureDetectorList[i].TrackingId)
@@ -103,17 +111,21 @@ public class KinectManager: MonoBehaviour {
         return _Sensor.BodyFrameSource.BodyCount;
     }
 
-
     //Callback from GestureDetector with its corresponding tracking ID
-    void ShotFired(ulong trackingID)
+    public void shotFired(ulong trackingID)
     {
-        for(int i=0; i < _Data.Length; i++)
+        Debug.Log("bang! " + trackingID);
+        /*
+        for (int i=0; i < _Data.Length; i++)
         {
+            Debug.Log(_Data[i].TrackingId);
             if(_Data[i].TrackingId == trackingID)
             {
-                Debug.Log("Player " + i + " says: bang!");
+                int playerIndex = i+1;
+                Debug.Log("Player " + playerIndex + " shot his gun.");
                 return;
             }
         }
+        */
     }
 }

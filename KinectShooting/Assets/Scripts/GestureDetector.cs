@@ -16,12 +16,12 @@ using UnityEngine;
 public class GestureDetector : IDisposable
 {
     /// <summary> Path to the gesture database that was trained with VGB </summary>
-    private readonly string gestureDatabase = @"Assets\GestureDatabase\GunGestures.gbd";
+    private readonly string gestureDatabase = @"GunGestures.gbd";
 
     /// <summary> Name of the discrete gesture in the database that we want to track </summary>
     private readonly string shootingGestureName = "Shoot";
-
-    private bool shootingGestureFiring = false;
+    private readonly double shootingCertaintyThreshold = 0.9;
+    public bool shotFired = false;
 
     /// <summary> Gesture frame source which should be tied to a body tracking ID </summary>
     private VisualGestureBuilderFrameSource vgbFrameSource = null;
@@ -170,23 +170,19 @@ public class GestureDetector : IDisposable
 
                             if (result != null)
                             {
-                                if (result.Detected)
-                                {
-                                    if (!shootingGestureFiring)
-                                    {
-                                        Debug.Log("bang!");
-                                    }
-                                    shootingGestureFiring = true;
-                                }
-                                else
-                                {
-                                    shootingGestureFiring = false;
-                                }
+                                shotFired = result.Detected && result.Confidence > shootingCertaintyThreshold;
+                                /*
+                               if (result.Detected && result.Confidence > shootingCertaintyThreshold)
+
+                               {
+                                   KinectManager.shotFired(TrackingId);
+                               }
+                               */
                             }
-                                // update the GestureResultView object with new gesture result values
-                                
-                                
-                            }
+                            // update the GestureResultView object with new gesture result values
+
+
+                        }
                         }
                     }
                 }
