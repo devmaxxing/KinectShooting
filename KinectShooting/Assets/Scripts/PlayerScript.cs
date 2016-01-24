@@ -5,7 +5,6 @@ using Windows.Kinect;
 public class PlayerScript : MonoBehaviour {
     public int playerID;
     public GameObject targetBreak;
-    //public GameObject gunshotEffect;
     public KinectManager kinectManager;
     private GameObject target;
     private GameController gameController;
@@ -64,8 +63,6 @@ public class PlayerScript : MonoBehaviour {
 
     public void shoot()
     {
-       //GameObject gunshoteffect = GameObject.Instantiate(gunshotEffect);
-       //gunshoteffect.transform.position = Input.mousePosition;
         this.GetComponent<UnityEngine.AudioSource>().Play();
         var targets = GameObject.FindGameObjectsWithTag("Target");
         foreach(GameObject target in targets)
