@@ -42,17 +42,16 @@ public class PlayerScript : MonoBehaviour {
                 }
                 if (player1 > -1)
                 {
-                    if (_Data[player1].HandRightState != HandState.Closed)
-                    {
-                        float horizontal =
-                            (float)(_Data[player1].Joints[JointType.HandRight].Position.X
-                                * 200 - _Data[player1].Joints[JointType.ShoulderRight].Position.X * 120);
-                        float vertical =
-                            (float)(_Data[player1].Joints[JointType.HandRight].Position.Y
-                                * 200 - _Data[player1].Joints[JointType.ShoulderRight].Position.Y * 120);
+                   
+                    float horizontal =
+                        (float)(_Data[player1].Joints[JointType.HandRight].Position.X
+                            * 200 - _Data[player1].Joints[JointType.ShoulderRight].Position.X * 120);
+                    float vertical =
+                        (float)(_Data[player1].Joints[JointType.HandRight].Position.Y
+                            * 200 - _Data[player1].Joints[JointType.ShoulderRight].Position.Y * 120);
 
-                        transform.position = new Vector2(horizontal, vertical);
-                    }
+                    transform.position = new Vector2(horizontal, vertical);
+                    
                 }
             }
            
