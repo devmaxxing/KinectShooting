@@ -20,7 +20,7 @@ public class GestureDetector : IDisposable
 
     /// <summary> Name of the discrete gesture in the database that we want to track </summary>
     private readonly string shootingGestureName = "Shoot";
-    private readonly double shootingCertaintyThreshold = 0.9;
+    private readonly double shootingCertaintyThreshold = 0.7;
     public bool shotFired = false;
 
     /// <summary> Gesture frame source which should be tied to a body tracking ID </summary>
@@ -170,6 +170,7 @@ public class GestureDetector : IDisposable
 
                             if (result != null)
                             {
+                                Debug.Log(result.Confidence);
                                 shotFired = result.Detected && result.Confidence > shootingCertaintyThreshold;
                                 /*
                                if (result.Detected && result.Confidence > shootingCertaintyThreshold)
