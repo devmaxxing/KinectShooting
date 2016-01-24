@@ -9,7 +9,7 @@ public class BackgroundController : MonoBehaviour {
         if (GameController.gameStarted)
         {
             transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
-            if (transform.position.x < -100)
+            if (transform.position.x < -60)
             {
                 Destroy(this.gameObject);
             }
