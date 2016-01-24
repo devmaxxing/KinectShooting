@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour {
     public Text[] scoreTexts;
     //public Text timeText;
     public Text startText;
+    public Text startTitle;
 
     private int[] scores = { 0 };
     private float timeElapsed = 0;
@@ -34,12 +35,14 @@ public class GameController : MonoBehaviour {
         //}
         Cursor.visible = false;
         startText.text = "Shoot the target to start.";
+        startTitle.text = "  KA-BANG!!";
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (gameStarted && !gameOver) {
             startText.text = "";
+            startTitle.text = "";
             timeElapsed += Time.deltaTime;
             if(timeElapsed > respawnSpeed)
             {
@@ -57,6 +60,7 @@ public class GameController : MonoBehaviour {
             titleAudio.Play();
             gameAudio.Stop();
             startText.text = "Game Over! Shoot the target to try again.";
+            startTitle.text = "  KA-BANG!!";
             scores[0] = 0;
             startTarget.SetActive(true);
             gameOver = false;
@@ -72,12 +76,12 @@ public class GameController : MonoBehaviour {
             if(respawnSpeed!=0.0f)
                 respawnSpeed -= 0.05f;
         }
-        scoreTexts[playerID].text = "Player " + (playerID + 1) + ": " + scores[playerID];
+        scoreTexts[playerID].text = "Score : " + scores[playerID];
     }
 
     public void reset()
     {
-        scoreTexts[0].text = "Player 1: " + scores[0];
+        scoreTexts[0].text = "Score : " + scores[0];
         target.GetComponent<TargetScript>().speed = 20;
         respawnSpeed = 1;
     }
